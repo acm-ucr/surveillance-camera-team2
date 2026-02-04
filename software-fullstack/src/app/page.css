@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&family=Poetsen+One&display=swap');
+
+body {
+    background-color: #21233D;
+    display: flex;
+    flex-direction: column;
+}
+
+.top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title {
+    color: #B7BAD0;
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+.logo {
+    color: #3F95FF;
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding: 1rem;
+}
+
+/* .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+.camDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: #16172B;
+    border: #9CC9FF, 1px solid;
+    height: 85vh;
+    width: 55%;
+    margin: 1rem;
+}
+
+.camDisplay video {
+    height: 80vh;
+    width: 65%;
+    object-fit: cover;
+}
+
+/* .detection {
+    background-color: #16172B;
+    height: 85vh;
+    width: 40%;
+    margin: 1rem;
+} */
