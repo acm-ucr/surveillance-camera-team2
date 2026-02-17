@@ -1,7 +1,7 @@
 import cv2
 from ultralytics import YOLO
 
-model = YOLO("/Users/taito/Downloads/best.pt")
+model = YOLO("/Users/taito/Downloads/bestV2.pt")
 print(model.names)
 
 cap = cv2.VideoCapture(0)
