@@ -1,13 +1,45 @@
 "use client";
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
 import NightVision from './nightvision';
 
 interface WebcamStreamerProps {
   nightVision: boolean;
 }
 
-const WebcamStreamer: React.FC<WebcamStreamerProps> = ({ nightVision }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
+export interface WebcamStreamerHandle {
+  takeScreenshot: () => void;
+}
+
+const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
+  ({ nightVision }, ref) => {
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useImperativeHandle(ref, () => ({
+      takeScreenshot() {
+        const video = videoRef.current;
+        if (!video) return;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        if (nightVision) {
+          ctx.filter = 'brightness(1.8) contrast(1.4) saturate(0) sepia(1) hue-rotate(70deg)';
+        }
+
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const now = new Date();
+        const timestamp = now.toISOString().replace(/:/g, '-').replace('T', '_').split('.')[0];
+
+        const link = document.createElement('a');
+        link.download = `forge-cam-${timestamp}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      }
+  }));
 
   useEffect(() => {
     const startWebcam = async () => {
@@ -52,6 +84,7 @@ const WebcamStreamer: React.FC<WebcamStreamerProps> = ({ nightVision }) => {
       />
     </>
   );
-};
+  }
+);
 
 export default WebcamStreamer;
