@@ -1,5 +1,6 @@
 /* @config '../../tailwind.config.ts'; */
 @import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&family=Poetsen+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Kelly+Slab&family=Poetsen+One&display=swap');
 /* @import "tailwindcss"; */
 
 :root {
@@ -8,7 +9,7 @@
     --color-surface:      #16172B;
     --color-border:       #9CC9FF;
     --color-accent:       #3F95FF;
-    --color-text:         #B7BAD0;
+    --color-title:         #B7BAD0;
     --color-btn-text:     #1E1E1E;
 
     /* Spacing */
@@ -18,6 +19,15 @@
 
     /* Radius */
     --radius:    0.5rem;
+}
+
+[data-theme="light"] {
+    --color-bg:           #F0F4FF;
+    --color-surface:      #FFFFFF;
+    --color-border:       #3F95FF;
+    --color-accent:       #3F95FF;
+    --color-title:        #333760;
+    --color-btn-text:     #FFFFFF;
 }
 
 body {
@@ -34,6 +44,7 @@ body {
     flex-direction: column;
     flex: 1;
     padding: 0 var(--space-sm);
+    overflow: hidden;
 }
 
 .top {
@@ -52,21 +63,23 @@ body {
     display: flex;
     justify-content: flex-start;
     width: 100%;
+    padding-left: var(--space-xs);
 }
 
 .title, .logo {
     font-family: "Poetsen One", sans-serif;
     font-weight: 400;
     font-size: 1.5rem;
-    padding: var(--space-xs);
 }
 
 .title {
-    color: var(--color-text);
+    color: var(--color-title);
+    padding-left: 1rem;
 }
 
 .logo {
     color: var(--color-accent);
+    padding-right: 1rem;
 }
 
 .main {
@@ -74,12 +87,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: var(--space-md);
+    margin: var(--space-md) var(--space-md) 0;
     min-height: 0;
 }
 
 .camDisplay { 
-    justify-content: center;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius);
@@ -100,9 +112,15 @@ body {
 
 .night-vision, .screenshot, .mode {
     background-color: var(--color-border);
-    color: var(--color-btn-text);
     border: none;
     border-radius: var(--radius);
+
+    font-family: "DM Sans", sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--color-btn-text);
+    letter-spacing: 0.03em;
+    
     padding: var(--space-xs) var(--space-sm);
     margin: var(--space-sm);
     cursor: pointer;

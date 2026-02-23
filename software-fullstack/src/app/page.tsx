@@ -1,9 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import WebcamStreamer from './video';
 
 const Home = () => {
   const [nightVision, setNightVision] = useState(false);
+  const [lightMode, setLightMode] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", lightMode ? "light" : "dark");
+  }, [lightMode]);
+
   return (
     <div className="page">
       <div className="top">
@@ -16,10 +22,10 @@ const Home = () => {
           onClick={() => setNightVision(v => !v)}>
             {nightVision ? "Night Vision: ON" : "Night Vision: OFF"}</button>
           <button className="screenshot">Screenshot</button>
-          <button className="mode">Light Mode</button>
+          <button className="mode" onClick={() => setLightMode(v => !v)}>
+            {lightMode ? "Dark Mode" : "Light Mode"}</button>
         </div>
       </div>
-
       <div className="main">
         <div className="camDisplay">
           <WebcamStreamer nightVision={nightVision}/>
