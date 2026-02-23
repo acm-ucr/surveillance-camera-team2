@@ -1,3 +1,123 @@
-@import "tailwindcss";
+/* @config '../../tailwind.config.ts'; */
+@import url('https://fonts.googleapis.com/css2?family=Kelly+Slab&family=Poetsen+One&display=swap');
+/* @import "tailwindcss"; */
 
-@config '../../tailwind.config.ts';
+:root {
+    /* Colors */
+    --color-bg:           #21233D;
+    --color-surface:      #16172B;
+    --color-border:       #9CC9FF;
+    --color-accent:       #3F95FF;
+    --color-text:         #B7BAD0;
+    --color-btn-text:     #1E1E1E;
+
+    /* Spacing */
+    --space-xs:  0.4rem;
+    --space-sm:  0.5rem;
+    --space-md:  1rem;
+
+    /* Radius */
+    --radius:    0.5rem;
+}
+
+body {
+    background-color: var(--color-bg);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    height: 100vh;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 0 var(--space-sm);
+}
+
+.top {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+.titles {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}   
+
+.buttons {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.title, .logo {
+    font-family: "Poetsen One", sans-serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding: var(--space-xs);
+}
+
+.title {
+    color: var(--color-text);
+}
+
+.logo {
+    color: var(--color-accent);
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: var(--space-md);
+    min-height: 0;
+}
+
+.camDisplay { 
+    justify-content: center;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    height: 100%;
+    width: 100%;
+    max-width: 1400px;
+    overflow: hidden;
+    display: flex;
+    
+}
+
+.webcam-video {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.night-vision, .screenshot, .mode {
+    background-color: var(--color-border);
+    color: var(--color-btn-text);
+    border: none;
+    border-radius: var(--radius);
+    padding: var(--space-xs) var(--space-sm);
+    margin: var(--space-sm);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.night-vision:hover,
+.screenshot:hover,
+.mode:hover {
+    opacity: 0.85;
+}
+
+/* .detection {
+    background-color: var(--color-surface);
+    height: 85vh;
+    width: 40%;
+    margin: 1rem;
+} */

@@ -1,7 +1,12 @@
 "use client";
 import React, { useRef, useEffect } from 'react';
+import NightVision from './nightvision';
 
-const WebcamStreamer: React.FC = () => {
+interface WebcamStreamerProps {
+  nightVision: boolean;
+}
+
+const WebcamStreamer: React.FC<WebcamStreamerProps> = ({ nightVision }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -36,7 +41,8 @@ const WebcamStreamer: React.FC = () => {
   }, []); // Empty dependency array ensures this runs once on mount
 
   return (
-    <div>
+    <>
+      <NightVision enabled={nightVision} videoRef={videoRef} />
       <video
         ref={videoRef}
         autoPlay
@@ -44,7 +50,7 @@ const WebcamStreamer: React.FC = () => {
         muted // Muted to avoid feedback loops if audio is enabled
         className="webcam-video"
       />
-    </div>
+    </>
   );
 };
 
