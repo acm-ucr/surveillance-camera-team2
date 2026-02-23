@@ -1,33 +1,35 @@
-import "./page.css";
+import "./styles.css";
 import WebcamStreamer from './video';
+export const metadata = {
+  title: "ACM Forge Camera",
+};
 
 const Home = () => {
-
-  return <>
-    <title>ACM Forge Camera</title>
-
-    {/* banner */}
-    <div className="top">
-      <h1 className="title">Forge Cam</h1>
-      <h1 className="logo">ACM</h1>
-    </div>
-
-    {/* body */}
-    <div className="main">
-      <div className="camDisplay">
-        <WebcamStreamer/>
+  return (
+    <div className="page">
+      <div className="top">
+        <div className="titles">
+          <h1 className="title">Forge Cam</h1>
+          <h1 className="logo">ACM</h1>
+        </div>
+        <div className="buttons">
+          <button className="night-vision">Night Vision</button>
+          <button className="screenshot">Screenshot</button>
+          <button className="mode">Light Mode</button>
+        </div>
       </div>
 
-    {/* <div className="detection">
-
-    </div> */}
+      <div className="main">
+        <div className="camDisplay">
+          <WebcamStreamer/>
+        </div>
+      </div>
     </div>
-
-    {/* features to add:
-    screenshot button
-    night vision */}
-
-    </>;
+  
+    // features to add:
+    // live time/date feature
+    
+  );
 };
 
 export default Home;

@@ -42,7 +42,7 @@ const WebcamStreamer: React.FC = () => {
         autoPlay
         playsInline // Important for mobile devices
         muted // Muted to avoid feedback loops if audio is enabled
-        style={{ width: '100%', maxWidth: '600px', border: '1px solid black' }}
+        className="webcam-video"
       />
     </div>
   );
