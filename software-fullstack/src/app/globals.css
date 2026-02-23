@@ -100,7 +100,12 @@ body {
     max-width: 1400px;
     overflow: hidden;
     display: flex;
-    
+    justify-content: center;
+    align-items: center;
+}
+
+.video-wrapper {
+    position: relative;
 }
 
 .webcam-video {
@@ -108,6 +113,24 @@ body {
     width: 100%;
     object-fit: contain;
     display: block;
+}
+
+.video-wrapper.scanlines::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+    );
+    pointer-events: none;
+    z-index: 1;
 }
 
 .night-vision, .screenshot, .mode {

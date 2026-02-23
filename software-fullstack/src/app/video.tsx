@@ -31,6 +31,14 @@ const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
         }
 
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        if (nightVision) {
+          ctx.filter = 'none'; // Reset filter fso scanlines aren't tinted
+          for (let y = 0; y < canvas.height; y += 4) {
+            ctx.fillStyle = `rgba(0, 0, 0, 0.15)`;
+            ctx.fillRect(0, y + 2, canvas.width, 2);
+          }
+        }
+
         const now = new Date();
         const timestamp = now.toISOString().replace(/:/g, '-').replace('T', '_').split('.')[0];
 
@@ -75,13 +83,15 @@ const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
   return (
     <>
       <NightVision enabled={nightVision} videoRef={videoRef} />
-      <video
-        ref={videoRef}
-        autoPlay
-        playsInline // Important for mobile devices
-        muted // Muted to avoid feedback loops if audio is enabled
-        className="webcam-video"
-      />
+      <div className={`video-wrapper ${nightVision ? 'scanlines' : ''}`}>
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline // Important for mobile devices
+          muted // Muted to avoid feedback loops if audio is enabled
+          className="webcam-video"
+        />
+      </div>
     </>
   );
   }
