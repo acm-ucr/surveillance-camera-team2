@@ -32,7 +32,11 @@ const Home = () => {
         <div className="camDisplay">
           <WebcamStreamer ref={webcamRef} nightVision={nightVision}/>
         </div>
+        <div className="detections">
+          <h2>Detection Logs</h2>
+        </div>
       </div>
+      
     {/*features to add: 
     --live time/date feature*/}
     </div>
