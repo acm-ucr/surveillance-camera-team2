@@ -1,4 +1,4 @@
-"use client";
+"use client"; /* runs in the browser */
 import { useEffect, useState, useRef } from "react";
 import WebcamStreamer, { WebcamStreamerHandle } from './video';
 
@@ -38,7 +38,8 @@ const Home = () => {
       </div>
       
     {/*features to add: 
-    --live time/date feature*/}
+    --live time/date feature
+    --better background?*/}
     </div>
   );
 };
