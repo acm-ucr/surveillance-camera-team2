@@ -1,6 +1,7 @@
-"use client"; /* runs in the browser */
-import { useEffect, useState, useRef } from "react";
+"use client"; 
+import { useEffect, useState, useRef} from "react";
 import WebcamStreamer, { WebcamStreamerHandle } from './video';
+import MqttReceiver from './MQTTReceiver';
 
 const Home = () => {
   const [nightVision, setNightVision] = useState(false);
@@ -34,9 +35,9 @@ const Home = () => {
         </div>
         <div className="detections">
           <h2>Detection Logs</h2>
+          <MqttReceiver />
         </div>
       </div>
-      
     {/*features to add: 
     --live time/date feature
     --better background?*/}
