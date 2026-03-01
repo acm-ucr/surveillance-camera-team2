@@ -26,10 +26,10 @@ const MqttReceiver = () => {
 
   return (
     <div>
-      <h3>EMQX Receiver (React)</h3>
+      {/* <h3>EMQX Receiver (React)</h3>
       <p>Status: {connectionStatus}</p>
       <p>Subscribed to: testtopic/react</p>
-      <h4>Received Messages:</h4>
+      <h4>Received Messages:</h4> */}
       <ul>
         {messages.map((msg, index) => <li key={index}>{msg}</li>)}
       </ul>

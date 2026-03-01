@@ -1,17 +1,18 @@
 /* @config '../../tailwind.config.ts'; */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Orbitron:wght@400..900&family=Poetsen+One&display=swap');
 /* @import "tailwindcss"; */
 
 /* Global variables */
 
 :root { 
     /* Colors */
-    --color-bg:           #21233D;
+    /* --color-bg:           #21233D; */
+    --color-bg:           linear-gradient(#21233D 0%, #1a1c35 100%);
     --color-surface:      #16172B;
     --color-border:       #9CC9FF;
     --color-accent:       #3F95FF;
-    --color-title:         #B7BAD0;
+    --color-title:        #B7BAD0;
     --color-btn-text:     #1E1E1E;
+    --color-active:       #5AABFF;
 
     /* Spacing */
     --space-xs:  0.4rem;
@@ -24,16 +25,19 @@
 
 /* Colors that override for light mode */
 [data-theme="light"] {
-    --color-bg:           #F0F4FF;
+    /* --color-bg:           #F0F4FF; */
+    --color-bg:           linear-gradient(#F0F4FF 0%, #FFFFFF 100%);
     --color-surface:      #FFFFFF;
     --color-border:       #3F95FF;
     --color-accent:       #3F95FF;
     --color-title:        #333760;
     --color-btn-text:     #FFFFFF;
+    --color-active:       #1F6BC7;
 }
 
 body {
-    background-color: var(--color-bg);
+    /* background-color: var(--color-bg); */
+    background: var(--color-bg);
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -45,15 +49,21 @@ body {
     display: flex;
     flex-direction: column;
     flex: 1; /* fills the body */
-    padding: 0 var(--space-sm);
+    padding: 0;
+    padding-top: 0;
     overflow: hidden;
 }
 
 .top {
+    background-color: var(--color-surface);
     display: flex;
     flex-direction: column;
     width: 100%;
     box-sizing: border-box;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.7rem;
+    padding-top: 0.7rem;
+    margin: 0;
 }
 .titles {
     display: flex;
@@ -63,18 +73,20 @@ body {
 
 .title {
     font-size: 1.7rem;
-    font-family: "Orbitron", sans-serif;
+    font-family: var(--font-orbitron), sans-serif;
     font-weight: 600;
     color: var(--color-title);
-    padding-left: 1rem;
+    padding-left: var(--space-md);
+    margin: 0;
 }
 
 .logo {
     font-size: 1.7rem;
-    font-family: "Poetsen One", sans-serif;
+    font-family: var(--font-poetsen), sans-serif;
     font-weight: 400;
     color: var(--color-accent);
     padding-right: 1rem;
+    margin: 0;
 }
 
 .buttons {
@@ -82,7 +94,7 @@ body {
     justify-content: flex-start;
     width: 100%;
     padding-left: var(--space-xs);
-    margin-top: -0.3rem;
+    margin-top: var(--space-md);
 }
 
 .night-vision, .screenshot, .mode {
@@ -90,7 +102,7 @@ body {
     border: none;
     border-radius: var(--radius);
 
-    font-family: "DM Sans", sans-serif;
+    font-family: var(--font-dm-sans), sans-serif;
     font-weight: 500;
     font-size: 0.9rem;
     color: var(--color-btn-text);
@@ -108,6 +120,10 @@ body {
     opacity: 0.85;
 }
 
+.night-vision.active {
+    background-color: var(--color-active);
+}
+
 .main {
     flex: 1;
     display: flex;
@@ -116,10 +132,9 @@ body {
     align-items: stretch;
     min-height: 0;
     gap: var(--space-md);
-    margin: var(--space-xs) var(--space-md) var(--space-sm);
+    margin: var(--space-sm) var(--space-md);
     overflow: visible;
-    padding-top: 0.6rem;
-    /* box-sizing: border-box; */
+    padding-top: 0.7rem;
     max-height: 75vh;
 }
 
@@ -178,10 +193,11 @@ body {
     border-radius: var(--radius);
     overflow-y: auto; /* makes it scrollable if content exceeds height */
     min-width: 200px;
+    
 }
 
 .detections h2 {
-    font-family: "Orbitron", sans-serif;
+    font-family: var(--font-orbitron), sans-serif;
     font-weight: 500;
     font-size: 1.2rem;
     color: var(--color-title);
