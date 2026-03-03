@@ -41,6 +41,7 @@ const Home = () => {
     {/*features to add: 
     --live time/date feature
     --styling/features regarding detections
+    --update error and not-found pages
     --any other additional buttons*/}
     </div>
   );
