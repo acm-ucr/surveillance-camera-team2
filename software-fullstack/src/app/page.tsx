@@ -19,15 +19,15 @@ const Home = () => {
           <h1 className="title">Forge Cam</h1>
           <h1 className="logo">ACM</h1>
         </div>
-        <div className="buttons">
-          <button className="night-vision" 
-          onClick={() => setNightVision(v => !v)}>
-            {nightVision ? "Night Vision: ON" : "Night Vision: OFF"}</button>
-          <button className="screenshot" onClick = {() => webcamRef.current?.takeScreenshot()}>
-            Screenshot</button>
-          <button className="mode" onClick={() => setLightMode(v => !v)}>
-            {lightMode ? "Dark Mode" : "Light Mode"}</button>
-        </div>
+      </div>
+      <div className="buttons">
+        <button className={`night-vision ${nightVision ? "active" : ""}`} 
+        onClick={() => setNightVision(v => !v)}>
+          {nightVision ? "Night Vision" : "Night Vision"}</button>
+        <button className="screenshot" onClick = {() => webcamRef.current?.takeScreenshot()}>
+          Screenshot</button>
+        <button className="mode" onClick={() => setLightMode(v => !v)}>
+          {lightMode ? "Dark Mode" : "Light Mode"}</button>
       </div>
       <div className="main">
         <div className="camDisplay">
@@ -40,7 +40,9 @@ const Home = () => {
       </div>
     {/*features to add: 
     --live time/date feature
-    --better background?*/}
+    --styling/features regarding detections
+    --update error and not-found pages
+    --any other additional buttons*/}
     </div>
   );
 };
