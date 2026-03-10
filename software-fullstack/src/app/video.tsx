@@ -5,6 +5,7 @@ import NightVision from './nightvision';
 interface WebcamStreamerProps {
   nightVision: boolean;
   modelURL: string;
+  remoteFrame?: string | null;
 }
 
 export interface WebcamStreamerHandle {
@@ -12,7 +13,7 @@ export interface WebcamStreamerHandle {
 }
 
 const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
-  ({ nightVision }, ref) => {
+  ({ nightVision, remoteFrame }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
@@ -119,13 +120,17 @@ const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
     <>
       <NightVision enabled={nightVision} videoRef={videoRef} />
       <div className={`video-wrapper ${nightVision ? 'scanlines' : ''}`}>
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline // Important for mobile devices
-          muted // Muted to avoid feedback loops if audio is enabled
-          className="webcam-video"
-        />
+        {remoteFrame ? (
+          <img src={remoteFrame} alt="Remote feed" className="webcam-video" />
+        ) : (
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            muted
+            className="webcam-video"
+          />
+        )}
         <div className="timestamp">
           <span> {currentTime ? `${formatDate(currentTime)} ${formatTime(currentTime)}` : ''} </span>
         </div>
@@ -140,3 +145,4 @@ const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
 );
 
 export default WebcamStreamer;
+

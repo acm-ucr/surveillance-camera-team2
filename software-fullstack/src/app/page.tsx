@@ -6,6 +6,7 @@ import MqttReceiver from './MQTTReceiver';
 const Home = () => {
   const [nightVision, setNightVision] = useState(false);
   const [lightMode, setLightMode] = useState(false);
+  const [remoteFrame, setRemoteFrame] = useState<string | null>(null);
   const webcamRef = useRef<WebcamStreamerHandle>(null);
 
   useEffect(() => {
@@ -33,11 +34,12 @@ const Home = () => {
       </div>
       <div className="main">
         <div className="camDisplay">
-          <WebcamStreamer modelURL={AI_URL} ref={webcamRef} nightVision={nightVision}/>
+          <MqttReceiver onFrame={setRemoteFrame} />
+          <WebcamStreamer modelURL={AI_URL} ref={webcamRef} nightVision={nightVision} remoteFrame={remoteFrame}/>
         </div>
         <div className="detections">
           <h2>Detection Logs</h2>
-          <MqttReceiver />
+          
         </div>
       </div>
     {/*features to add: 
