@@ -9,11 +9,11 @@ app = Flask(__name__)
 
 model = YOLO("/Users/taito/Downloads/bestV2.pt")
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture('http://172.20.10.3:81/stream')
 
 broker = "broker.emqx.io"
 port = 1883
-topic = "taito/yolo/video/demo123"  # use unique topic
+topic = "taito/yolo/video/demo123"  
 
 mqtt_client = mqtt.Client()
 mqtt_client.connect(broker, port, 60)
