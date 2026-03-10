@@ -12,6 +12,8 @@ const Home = () => {
     document.documentElement.setAttribute("data-theme", lightMode ? "light" : "dark");
   }, [lightMode]);
 
+  const AI_URL = "http://172.20.10.5:5000";
+
   return (
     <div className="page">
       <div className="top">
@@ -31,7 +33,7 @@ const Home = () => {
       </div>
       <div className="main">
         <div className="camDisplay">
-          <WebcamStreamer ref={webcamRef} nightVision={nightVision}/>
+          <WebcamStreamer modelURL={AI_URL} ref={webcamRef} nightVision={nightVision}/>
         </div>
         <div className="detections">
           <h2>Detection Logs</h2>

@@ -1,9 +1,10 @@
 "use client";
-import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import React, { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import NightVision from './nightvision';
 
 interface WebcamStreamerProps {
   nightVision: boolean;
+  modelURL: string;
 }
 
 export interface WebcamStreamerHandle {
@@ -13,6 +14,18 @@ export interface WebcamStreamerHandle {
 const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
   ({ nightVision }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
+    const [currentTime, setCurrentTime] = useState<Date | null>(null);
+
+  useEffect(() => {
+    setCurrentTime(new Date());
+    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
+      return () => clearInterval(timer);
+    }, []);
+
+    const formatTime = (d: Date) =>
+      d.toLocaleTimeString("en-US", { hour12: false });
+    const formatDate = (d: Date) =>
+      d.toLocaleDateString("en-US", { year: "numeric", month: "2-digit", day: "2-digit" });
 
     useImperativeHandle(ref, () => ({
       takeScreenshot() {
@@ -41,6 +54,28 @@ const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
 
         const now = new Date();
         const timestamp = now.toISOString().replace(/:/g, '-').replace('T', '_').split('.')[0];
+        const timeStr = `${formatDate(now)} ${formatTime(now)}`;
+
+        const fontSize = Math.round(canvas.width * 0.018);
+        ctx.font = `${fontSize}px monospace`;
+
+        const padding = Math.round(canvas.width * 0.02);
+        const textWidth = ctx.measureText(timeStr).width;
+        const boxHeight = fontSize * 2;
+        const boxY = canvas.height - padding - boxHeight;
+
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+
+        // Background for timestamp
+        ctx.fillStyle = isLight ? 'rgba(255, 255, 255, 0.4)' : 'rgba(22, 23, 43, 0.4)';
+        ctx.beginPath();
+        const boxX = canvas.width - textWidth - padding * 2;
+        ctx.roundRect(boxX, boxY, textWidth + padding, boxHeight, 4);
+        ctx.fill();
+
+        // Text for timestamp
+        ctx.fillStyle = isLight ? 'rgba(22, 23, 43, 1)' : 'rgba(255, 255, 255, 1)';
+        ctx.fillText(timeStr, boxX + (padding / 2), boxY + (boxHeight * 0.65));
 
         const link = document.createElement('a');
         link.download = `forge-cam-${timestamp}.png`;
@@ -91,6 +126,13 @@ const WebcamStreamer = forwardRef<WebcamStreamerHandle, WebcamStreamerProps>(
           muted // Muted to avoid feedback loops if audio is enabled
           className="webcam-video"
         />
+        <div className="timestamp">
+          <span> {currentTime ? `${formatDate(currentTime)} ${formatTime(currentTime)}` : ''} </span>
+        </div>
+        <div className="rec">
+          <span className="rec-dot" />
+          <span className="rec-text">REC</span>
+        </div>
       </div>
     </>
   );

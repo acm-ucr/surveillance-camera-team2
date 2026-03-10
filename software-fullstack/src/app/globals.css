@@ -13,6 +13,7 @@
     --color-title:        #B7BAD0;
     --color-btn-text:     #1E1E1E;
     --color-active:       #5AABFF;
+    --color-timestamp:    #FFFFFF;
 
     /* Spacing */
     --space-xs:  0.4rem;
@@ -33,6 +34,7 @@
     --color-title:        #333760;
     --color-btn-text:     #FFFFFF;
     --color-active:       #1F6BC7;
+    --color-timestamp:    #16172B;
 }
 
 body {
@@ -170,7 +172,7 @@ body {
 
 .video-wrapper.scanlines::after {
     content: '';
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
@@ -184,6 +186,54 @@ body {
     );
     pointer-events: none;
     z-index: 1;
+}
+
+.rec {
+  position: absolute;
+  top: 2%;
+  left: 11%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: red;
+  animation: blink 1.5s infinite;
+}
+
+.rec-text {
+  font-family: monospace;
+  font-size: 0.75rem;
+  color: var(--color-timestamp);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.timestamp {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    bottom: 2%;
+    right: 11%;
+    background-color: color-mix(in srgb, var(--color-surface) 55%, transparent);
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.timestamp span {
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--color-timestamp);
 }
 
 .detections {
@@ -204,4 +254,23 @@ body {
     padding: var(--space-md) 1.1rem;
     border-bottom: 1px solid var(--color-border);
     margin: 0;
+}
+
+/* .detections p {
+    font-size: 0.875rem;
+} */
+
+.mqttReceiver {
+    font-family: var(--font-dm-sans), sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    color: var(--color-title);
+    padding: var(--space-xs) var(--space-md);
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--color-border);
+    line-height: 1.5;
+}
+
+.mqttReceiver:last-child {
+    border-bottom: none;
 }
